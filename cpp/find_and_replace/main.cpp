@@ -27,9 +27,10 @@ int main(int argc, char* argv[])
 	sourceString = new char[sourceStringLength];
 	replaceString = new char[replaceStringLength];
 
+	strncpy(sourceString, argv[2], sourceStringLength);
+	strncpy(replaceString, argv[3], replaceStringLength);
+
 	
-
-
 
 	return 0;
 }
