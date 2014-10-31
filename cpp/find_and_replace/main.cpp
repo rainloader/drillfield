@@ -40,6 +40,7 @@ int main(int argc, char* argv[])
 	while(c != EOF)
 	{
 		c = fgetc(pTargetFile);
+		stringBuffer[i] = c;
 		// source 문자열과 일치할 경우 stringBuffer에 넣어준다.
 		if(sourceString[i] == c)
 		{
@@ -55,27 +56,22 @@ int main(int argc, char* argv[])
 		else if(i != 0)
 		{
 			int k = 0;
-			for(int j=0; j<i; j++)
+			for(int j=0; j<=i; j++)
 			{
 				if(stringBuffer[j] == sourceString[k])
 					k++;
 				else
 					k = 0;
 			}
+			for(int j=0; j<=i-k; j++)
+			{
+				printf("%c", stringBuffer[j]);
+			}
 			if(k != 0)
 			{
-				for(int j=0; j<k; j++)
-				{
-					printf("%c", stringBuffer[j]);
-				}
 				ShiftArray(stringBuffer, i-k, k, i-k);
-				i = k;
 			}
-			else
-			{
-				i = 0;
-				printf("%c", c);
-			}
+			i = k;
 		}
 		else
 		{
