@@ -44,7 +44,6 @@ int main(int argc, char* argv[])
 		// source 문자열과 일치할 경우 stringBuffer에 넣어준다.
 		if(sourceString[i] == c)
 		{
-			stringBuffer[i] = c;
 			i++;
 			if(i == sourceStringLength)
 			{
@@ -55,21 +54,22 @@ int main(int argc, char* argv[])
 		// stringBuffer에 문자열이 남아있을 경우 : stringBuffer의 문자열이 sourceString과 일치하는지 체크한다.
 		else if(i != 0)
 		{
-			int k = 0;
-			for(int j=0; j<=i; j++)
+			int k = 0; // 일치하는 문자열의 길이
+			for(int j=1; j<=i; j++)
 			{
-				if(stringBuffer[j] == sourceString[k])
-					k++;
-				else
-					k = 0;
+				if(strncmp(stringBuffer+j, sourceString, i-j+1) == 0)
+				{
+					k = i-j+1;
+					break;
+				}
 			}
-			for(int j=0; j<=i-k; j++)
+			for(int j=0; j<i-k+1; j++)
 			{
 				printf("%c", stringBuffer[j]);
 			}
 			if(k != 0)
 			{
-				ShiftArray(stringBuffer, i-k, k, i-k);
+				ShiftArray(stringBuffer, i-k+1, k, -(i-k+1));
 			}
 			i = k;
 		}
@@ -99,5 +99,4 @@ void ShiftArray(char* string, int source, int length, int shiftAmount)
 		}
 	}
 }
-
 
